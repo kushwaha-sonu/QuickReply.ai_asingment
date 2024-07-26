@@ -1,0 +1,109 @@
+.dropdown {
+  position: relative;
+  width: 200px;
+}
+
+.dropdown-container { 
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  margin-block: 3px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.icon {
+  padding: 2px;
+}
+
+.helper-text {
+  font-size: 12px;
+  color: #666;
+}
+
+.dropdown-list {
+  position: absolute;
+  width: 100%;
+ 
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  color: black;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  border-radius:10px ;
+  -webkit-border-radius:10px ;
+  -moz-border-radius:10px ;
+  -ms-border-radius:10px ;
+  -o-border-radius:10px ;
+  
+}
+
+.dropdown-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dropdown-list li.active {
+
+  color: black;
+  
+}
+
+.dropdown-list li:hover {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.label_text {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.label_check_box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label_check_box_input{
+  width: 1.3em;
+  height: 1.3em;
+
+
+  vertical-align: middle;
+  border: 1px solid #6e6b6b;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.label_check_box_input:checked{
+  background-color: #18c52c;
+  border: none;
+}
+
+.icon-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
