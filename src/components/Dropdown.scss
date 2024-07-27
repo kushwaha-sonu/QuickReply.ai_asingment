@@ -5,22 +5,14 @@
 
   padding: 1rem;
 
-  &.unfilled {
-    // Add specific styles for unfilled state if needed
-  }
+ 
 
-  &.filled {
-    // Add specific styles for filled state if needed
-  }
 
   &.disabled {
     opacity: 0.6;
     pointer-events: none;
   }
 
-  &.error {
-    // Add specific styles for error state if needed
-  }
 
   .label_text {
     display: flex;
