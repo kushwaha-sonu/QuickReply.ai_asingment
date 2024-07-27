@@ -1,5 +1,5 @@
 import { Asterisk, CaretDown, CaretUp, Info, User } from "phosphor-react";
-import "./Dropdown.css";
+import "./Dropdown.scss";
 import { action } from "@storybook/addon-actions";
 import { useState } from "react";
 
@@ -32,9 +32,23 @@ export default function Dropdown({
   const [selectedItems, setSelectedItems] = useState<number[]>(
     type === "Multi" ? [] : [activeItemIndex]
   );
+
+  const [selectedStatus, setSelectedStatus] = useState(status);
   const [labelText, setLabelText] = useState(text);
 
   const handleItemClick = (index: number) => {
+    if (selectedItems) {
+      setSelectedStatus("Filled");
+    }
+
+    if(!selectedStatus){
+      setSelectedStatus("Unfilled");
+    }
+
+    if(type==="SingleNoIcon"){
+      setLabelText(items[0])
+    }
+
     if (type === "Multi") {
       let updatedSelectedItems;
       if (selectedItems.includes(index)) {
@@ -75,11 +89,11 @@ export default function Dropdown({
       <div
         className="dropdown-container"
         onClick={toggleDropdown}
-        style={
-          status === "Disabled"
-            ? { cursor: "not-allowed", backgroundColor: "#adadad" }
-            : {}
-        }
+        style={{
+          cursor: status === "Disabled" ? "not-allowed" : "",
+          backgroundColor: status === "Disabled" ? "#adadad" : "",
+          borderColor: status === "Error" ? "red" : "",
+        }}
       >
         {type !== "SingleNoIcon" && <User className="icon" size={20} />}
         <input type="text" value={labelText} readOnly className="input-field" />
@@ -88,35 +102,52 @@ export default function Dropdown({
         </div>
       </div>
 
-      {helperText && <div className="helper-text">{helperText}</div>}
-      {isOpen && (
-        <ul
+      {helperText && (
+        <div
+          className="helper-text"
           style={{
-            height: items.length > 4 ? "150px" : "auto",
-            overflowY: items.length > 4 ? "auto" : "visible",
+            color:
+              status === "Error"
+                ? "red"
+                : status === "Filled" || selectedStatus === "Filled"
+                  ? "green"
+                  : "black",
           }}
-          className="dropdown-list"
         >
-          {items.map((item, index) => (
-            <li
-              key={index}
-              className={selectedItems.includes(index) ? "active" : ""}
-              onClick={() => handleItemClick(index)}
-            >
-              <label className="label_check_box">
-                {item}
-                {type !== "SingleNoIcon" && (
-                  <input
-                    type={type === "SingleRadio" ? "radio" : "checkbox"}
-                    checked={selectedItems.includes(index)}
-                    readOnly
-                  />
-                )}
-              </label>
-            </li>
-          ))}
-        </ul>
+          {selectedStatus}
+        </div>
       )}
+      <div className="dropdown-list-container">
+        {isOpen && (
+          <ul
+            style={{
+              height: items.length > 4 ? "150px" : "auto",
+              overflowY: items.length > 4 ? "auto" : "visible",
+            }}
+            className="dropdown-list"
+          >
+            {items.map((item, index) => (
+              <li
+                key={index}
+                className={selectedItems.includes(index) ? "active" : ""}
+                onClick={() => handleItemClick(index)}
+              >
+                <label className="label_check_box">
+                  {type !== "SingleNoIcon" && (
+                    <input
+                      type={type === "SingleRadio" ? "radio" : "checkbox"}
+                      checked={selectedItems.includes(index)}
+                      readOnly
+                      className="check_box"
+                    />
+                  )}
+                  {item}
+                </label>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
